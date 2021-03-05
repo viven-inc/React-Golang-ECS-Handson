@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+
+  # Golang Backend
+  back:
+    build: ./go-app/
+    image: ecs-case1:back
+    container_name: back
+    ipc: host
+    ports:
+      - 8000:8000
+    networks:
+      - public-network
+
+  # React Frontend
+  front:
+    build: ./react-app/
+    image: ecs-case1:front
+    container_name: front
+    ipc: host
+    ports:
+      - 80:80
+    networks:
+      - public-network
+
+networks:
+  public-network:
+    driver: bridge
